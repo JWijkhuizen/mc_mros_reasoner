@@ -100,6 +100,21 @@ class Reasoner(object):
             return_value = 0
         return return_value
 
+    def updateQA_pred(self, values):
+        # Find the FG with the same name that the one in the QA message (in diagnostic_status.name)
+        for i in range(len(values)):
+            print("Prediction received for %s, safety=%s"%(values[i].key,values[i].value))
+            fd = next((fd for fd in self.tomasys.FunctionDesign.instances() if fd.name == values[i].key), None)
+            qa_type = self.onto.search_one(iri="*{}".format('safety'))
+            if qa_type != None:
+                value = float(values[i].value)
+                with self.lock:
+                    updateQAestimation(fd, qa_type, value)
+                return_value = 1
+            else:
+                return_value = 0
+                return return_value
+        return return_value
 
     # EXEC REASONING to update ontology with inferences
     # TODO CHECK: update reasoner facts, evaluate, retrieve action, publish

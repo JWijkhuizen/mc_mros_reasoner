@@ -6,10 +6,11 @@ from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus, KeyValue
 from metacontrol_msgs.msg import MvpReconfigurationAction, MvpReconfigurationGoal, \
                                 GraphManipulationActionAction,  GraphManipulationActionGoal, \
                                 GraphManipulationMessage, SystemState
+from metacontrol_msgs.srv import QAPredictions
 
 from mros1_reasoner.reasoner import Reasoner
 from mros1_reasoner.tomasys import obtainBestFunctionDesign, print_ontology_status, evaluateObjectives, resetKBstatuses
-
+from std_srvs.srv import Trigger, TriggerRequest
 
 
 class RosReasoner(Reasoner):
@@ -26,7 +27,7 @@ class RosReasoner(Reasoner):
         model_file = self.check_and_read_parameter('~model_file')
         tomasys_file =  self.check_and_read_parameter('~tomasys_file')
         # Get desired_configuration_name from parameters
-        self.grounded_configuration = self.check_and_read_parameter('~desired_configuration')
+        self.grounded_configuration = self.check_and_read_parameter('/desired_configuration')
 
         #Start interfaces
         sub_diagnostics = rospy.Subscriber('/diagnostics', DiagnosticArray, self.callbackDiagnostics)
@@ -107,15 +108,15 @@ class RosReasoner(Reasoner):
             obj_navigate = self.get_new_tomasys_objective("o_navigateA", "*f_navigate")
 
             # Get ontology and tomasys file paths from parameters
-            nfr_energy_value = float(self.check_and_read_parameter('~nfr_energy', 0.5))
-            nfr_safety_value = float(self.check_and_read_parameter('~nfr_safety', 0.8))
+            # nfr_energy_value = float(self.check_and_read_parameter('/nfr_energy', 0.5))
+            nfr_safety_value = float(self.check_and_read_parameter('/nfr_safety', 0.8))
 
             # Load NFRs in the KB
-            nfr_energy = self.get_new_tomasys_nrf("nfr_energy", "*energy", nfr_energy_value)
+            # nfr_energy = self.get_new_tomasys_nrf("nfr_energy", "*energy", nfr_energy_value)
             nfr_safety = self.get_new_tomasys_nrf("nfr_safety", "*safety", nfr_safety_value)
 
             # Link NFRs to objective
-            obj_navigate.hasNFR.append(nfr_energy)
+            # obj_navigate.hasNFR.append(nfr_energy)
             obj_navigate.hasNFR.append(nfr_safety)
 
             # # Function Groundings and Objectives
@@ -155,6 +156,16 @@ class RosReasoner(Reasoner):
                         rospy.loginfo("QA value received!\tTYPE: {0}\tVALUE: {1}".format(diagnostic_status.values[0].key, diagnostic_status.values[0].value))
                     else:
                         rospy.logwarn("Unsupported QA TYPE received: %s ", str(diagnostic_status.values[0].key))
+
+                if diagnostic_status.message == "QA prediction":
+                    rospy.logwarn("QA prediction received for\t{0} \tTYPE: {1}\tVALUE: {2}".format(diagnostic_status.name, diagnostic_status.values[0].key, diagnostic_status.values[0].value))
+                    up_qa = self.updateQA_pred(diagnostic_status)
+                    if up_qa == -1:
+                        rospy.logwarn("QA message refers to a FG not found in the KB, we asume it refers to the current grounded_configuration (1st fg found in the KB)")
+                    elif up_qa == 1:
+                        rospy.loginfo("QA prediction received!\tTYPE: {0}\tVALUE: {1}".format(diagnostic_status.values[0].key, diagnostic_status.values[0].value))
+                    else:
+                        rospy.logwarn("Unsupported QA TYPE received: %s ", str(diagnostic_status.values[0].key))
     # for MVP with QAs - request the FD.name to reconfigure to
     def request_configuration(self, fd):
         rospy.logwarn_throttle(1., 'New Configuration requested: {}'.format(fd.name))
@@ -190,7 +201,7 @@ class RosReasoner(Reasoner):
 
         # PRINT system status
         print_ontology_status(self.tomasys)
-
+            
         # EVALUATE functional hierarchy (objectives statuses) (MAPE - Analysis)
         objectives_internal_error = evaluateObjectives(self.tomasys)
         if not objectives_internal_error:
@@ -206,6 +217,18 @@ class RosReasoner(Reasoner):
         else:
             rospy.logwarn("Objectives in status ERROR: {}".format([o.name for o in objectives_internal_error]) )
             rospy.loginfo('  >> Finished MAPE-K ** ANALYSIS **')
+
+        # Update kb with predicted QA values
+        rospy.loginfo('  >> Request for QA updates **')
+        try:
+            req_qa_updates = rospy.ServiceProxy('/qa_pred_update', QAPredictions)
+            # rospy.wait_for_service('/qa_pred_update')
+            resp = req_qa_updates("")
+            self.updateQA_pred(resp.values)
+            rospy.loginfo("QA update request send")
+        except Exception as exc:
+            print(exc)
+            rospy.loginfo('/qa_pred_update service not available')
 
         # ADAPT MAPE -Plan & Execute
         rospy.loginfo('  >> Started MAPE-K ** PLAN adaptation **')

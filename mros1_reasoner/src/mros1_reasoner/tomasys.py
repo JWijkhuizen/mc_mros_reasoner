@@ -73,7 +73,6 @@ def print_ontology_status(kb_box):
 # update the QA value for an FG with the value received
 def updateQAvalue(fg, qa_type, value, tbox, abox):
     qas = fg.hasQAvalue
-
     if qas == []: # for the first qa value received
         qav = tbox.QAvalue("obs_{}".format(qa_type.name
                                                ), namespace=abox, isQAtype=qa_type, hasValue=value)
@@ -87,6 +86,16 @@ def updateQAvalue(fg, qa_type, value, tbox, abox):
         qav = tbox.QAvalue("obs_{}".format(qa_type.name
                                          ), isQAtype=qa_type, namespace=abox, hasValue=value)
         fg.hasQAvalue.append(qav)
+
+def updateQAestimation(fd, qa_type, value):
+    qas = fd.hasQAestimation
+    if qas == []: # for the first qa value received
+        print("No QAestimation found")
+    else:
+        for qa in qas:
+            if qa.isQAtype == qa_type:
+                qa.hasValue = value
+                print("Estimation updated succesfull!")
 
 # Evaluates the Objective individuals in the KB and returns a list with those in error
 def evaluateObjectives(tbox):
@@ -131,6 +140,7 @@ def obtainBestFunctionDesign(o, tbox):
                 aux = u
 
         print("> Best FD available %s", str(best_fd.name))
+        print("> Best FD available %s"%(best_fd.name))
         return best_fd
     else:
         print("*** OPERATOR NEEDED, NO SOLUTION FOUND ***")
@@ -173,12 +183,13 @@ def meetNFRs(o, fds):
             else:
                 if nfr.isQAtype.name == 'energy':
                     if qas[0].hasValue > nfr.hasValue: # specific semantics for energy
-                        break
+                        continue
                 elif nfr.isQAtype.name == 'safety':
-                    if qas[0].hasValue < nfr.hasValue:  # specific semantics for energy
-                        break
+                    if qas[0].hasValue < nfr.hasValue:  # specific semantics for safety
+                        continue
                 else:
                     print("No known criteria for FD selection for that QA")
+            print("%s, %s"%(qas[0].name,qas[0].hasValue))
             filtered.append(fd)
     if filtered == []:
         print("No FDs meetf NFRs")
