@@ -372,7 +372,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_dwa_v0_a0_b0">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.79</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.885</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -382,7 +382,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_dwa_v0_a0_b1">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.84</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.904</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -392,7 +392,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_dwa_v0_a1_b0">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.892</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -402,7 +402,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_dwa_v0_a1_b1">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.94</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.878</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -412,7 +412,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_dwa_v1_a0_b0">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.67</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.736</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -422,7 +422,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_dwa_v1_a0_b1">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.84</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.742</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -432,7 +432,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_dwa_v1_a1_b0">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.717</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -442,7 +442,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_dwa_v1_a1_b1">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.77</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.729</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -452,7 +452,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_teb_v0_a0_b0">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.89</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.901</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -462,7 +462,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_teb_v0_a0_b1">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.94</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.9025</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -472,7 +472,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_teb_v0_a1_b0">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.75</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.9039</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -482,7 +482,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_teb_v0_a1_b1">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.74</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.9038</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -492,7 +492,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_teb_v1_a0_b0">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.67</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.731</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -502,7 +502,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_teb_v1_a0_b1">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.86</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.728</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -512,7 +512,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_teb_v1_a1_b0">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.95</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.722</toma:hasValue>
     </owl:NamedIndividual>
     
 
@@ -522,7 +522,7 @@
     <owl:NamedIndividual rdf:about="http://ros/navigation#qa_performance_teb_v1_a1_b1">
         <rdf:type rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
         <toma:isQAtype rdf:resource="http://ros/navigation#performance"/>
-        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.81</toma:hasValue>
+        <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.729</toma:hasValue>
     </owl:NamedIndividual>
     
 

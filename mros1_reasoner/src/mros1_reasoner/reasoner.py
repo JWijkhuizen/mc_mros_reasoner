@@ -14,6 +14,8 @@ import signal, sys
 from threading import Lock
 
 from mros1_reasoner.tomasys import *
+from diagnostic_msgs.msg import KeyValue
+
 
 class Reasoner(object):
     """docstring for Reasoner."""
@@ -28,6 +30,8 @@ class Reasoner(object):
                                             # TODO move to RosReasoner or remove: there can be multiple configurations grounded (for multiple objectives)
         # This Lock is used to ensure safety of tQAvalues
         self.lock = Lock()
+        
+        # self._pub_phasetimes = rospy.Publisher('/phase_times', KeyValue, queue_size=10)
 
         signal.signal(signal.SIGINT, self.save_ontology_exit)
 
@@ -103,7 +107,7 @@ class Reasoner(object):
     def updateQA_pred(self, values):
         # Find the FG with the same name that the one in the QA message (in diagnostic_status.name)
         for i in range(len(values)):
-            print("Prediction received for %s, safety=%s"%(values[i].key,values[i].value))
+            # print("Prediction received for %s, safety=%s"%(values[i].key,values[i].value))
             fd = next((fd for fd in self.tomasys.FunctionDesign.instances() if fd.name == values[i].key), None)
             qa_type = self.onto.search_one(iri="*{}".format('safety'))
             if qa_type != None:
@@ -137,3 +141,4 @@ class Reasoner(object):
     def save_ontology_exit(self, signal, frame):
         self.onto.save(file="error.owl", format="rdfxml")
         sys.exit(0)
+

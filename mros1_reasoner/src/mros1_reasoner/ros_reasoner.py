@@ -9,9 +9,9 @@ from metacontrol_msgs.msg import MvpReconfigurationAction, MvpReconfigurationGoa
 from metacontrol_msgs.srv import QAPredictions
 
 from mros1_reasoner.reasoner import Reasoner
-from mros1_reasoner.tomasys import obtainBestFunctionDesign, print_ontology_status, evaluateObjectives, resetKBstatuses
+from mros1_reasoner.tomasys import obtainBestFunctionDesign, print_ontology_status, evaluateObjectives, resetKBstatuses, test_desired_config
 from std_srvs.srv import Trigger, TriggerRequest
-
+from std_msgs.msg import String
 
 class RosReasoner(Reasoner):
     """docstring for RosComponents."""
@@ -27,7 +27,11 @@ class RosReasoner(Reasoner):
         model_file = self.check_and_read_parameter('~model_file')
         tomasys_file =  self.check_and_read_parameter('~tomasys_file')
         # Get desired_configuration_name from parameters
+        self.desired_configuration = self.check_and_read_parameter('/desired_configuration')
         self.grounded_configuration = self.check_and_read_parameter('/desired_configuration')
+
+        # Get modification number
+        self.modification = self.check_and_read_parameter('/modification',1)
 
         #Start interfaces
         sub_diagnostics = rospy.Subscriber('/diagnostics', DiagnosticArray, self.callbackDiagnostics)
@@ -69,11 +73,15 @@ class RosReasoner(Reasoner):
 
         self.initialized = True
         # Reasoner initialization completed
+
+        self._pub_log = rospy.Publisher('/log', String, queue_size=10)
+        self._pub_phasetimes = rospy.Publisher('/phase_times', KeyValue, queue_size=10)
+
         rospy.loginfo("[RosReasoner] -- Reasoner Initialization Ok")
 
 
     def start_timer(self):
-        timer_rate =  self.check_and_read_parameter('~reasoning_rate', 2.0)
+        timer_rate =  self.check_and_read_parameter('/reasoning_rate', 2.0)
         timer = rospy.Timer(rospy.Duration(timer_rate), self.timer_cb)
 
 
@@ -86,6 +94,7 @@ class RosReasoner(Reasoner):
                     The parameter value if it exists, None otherwise.
         """
         if rospy.has_param(str(param_name)):
+            rospy.logwarn("Parameter \'%s\' is defined! - Returning %s", str(param_name), rospy.get_param(str(param_name)))
             return rospy.get_param(str(param_name))
         else:
             rospy.logwarn("Parameter \'%s\' not defined! - Returning %s", str(param_name), str(default_value))
@@ -148,27 +157,30 @@ class RosReasoner(Reasoner):
                         rospy.logwarn("Diagnostics message received for %s with level %d, nothing done about it." % (diagnostic_name, diagnostic_level))
 
                 if diagnostic_status.message == "QA status":
+                    if diagnostic_status.values[0].key == 'safety':
+                        self._pub_log.publish("QA update received, %s value= %s"%(diagnostic_status.values[0].key,diagnostic_status.values[0].value))
                     rospy.logwarn("QA value received for\t{0} \tTYPE: {1}\tVALUE: {2}".format(diagnostic_status.name, diagnostic_status.values[0].key, diagnostic_status.values[0].value))
                     up_qa = self.updateQA(diagnostic_status)
                     if up_qa == -1:
                         rospy.logwarn("QA message refers to a FG not found in the KB, we asume it refers to the current grounded_configuration (1st fg found in the KB)")
-                    elif up_qa == 1:
-                        rospy.loginfo("QA value received!\tTYPE: {0}\tVALUE: {1}".format(diagnostic_status.values[0].key, diagnostic_status.values[0].value))
-                    else:
+                    elif up_qa != 1:
+                        # rospy.loginfo("QA value received!\tTYPE: {0}\tVALUE: {1}".format(diagnostic_status.values[0].key, diagnostic_status.values[0].value))
+                    # else:
                         rospy.logwarn("Unsupported QA TYPE received: %s ", str(diagnostic_status.values[0].key))
 
                 if diagnostic_status.message == "QA prediction":
-                    rospy.logwarn("QA prediction received for\t{0} \tTYPE: {1}\tVALUE: {2}".format(diagnostic_status.name, diagnostic_status.values[0].key, diagnostic_status.values[0].value))
+                    # rospy.logwarn("QA prediction received for\t{0} \tTYPE: {1}\tVALUE: {2}".format(diagnostic_status.name, diagnostic_status.values[0].key, diagnostic_status.values[0].value))
+                    self._pub_log.publish("QA prediction received, %s value= %s"%(diagnostic_status.values[0].key,diagnostic_status.values[0].value))
                     up_qa = self.updateQA_pred(diagnostic_status)
                     if up_qa == -1:
                         rospy.logwarn("QA message refers to a FG not found in the KB, we asume it refers to the current grounded_configuration (1st fg found in the KB)")
-                    elif up_qa == 1:
-                        rospy.loginfo("QA prediction received!\tTYPE: {0}\tVALUE: {1}".format(diagnostic_status.values[0].key, diagnostic_status.values[0].value))
-                    else:
+                    elif up_qa != 1:
+                        # rospy.loginfo("QA prediction received!\tTYPE: {0}\tVALUE: {1}".format(diagnostic_status.values[0].key, diagnostic_status.values[0].value))
+                    # else:
                         rospy.logwarn("Unsupported QA TYPE received: %s ", str(diagnostic_status.values[0].key))
     # for MVP with QAs - request the FD.name to reconfigure to
     def request_configuration(self, fd):
-        rospy.logwarn_throttle(1., 'New Configuration requested: {}'.format(fd.name))
+        # rospy.logwarn_throttle(1., 'New Configuration requested: {}'.format(fd.name))
 
         goal = MvpReconfigurationGoal()
         goal.desired_configuration_name = fd.name
@@ -184,19 +196,21 @@ class RosReasoner(Reasoner):
             return
 
         result = self.rosgraph_manipulator_client.get_result().result
-        rospy.loginfo('Result: {}'.format(result) )
+        # rospy.loginfo('Result: {}'.format(result) )
         return result
 
     ## main metacontrol loop
     def timer_cb(self, event):
 
-        rospy.loginfo('Entered timer_cb for metacontrol reasoning')
-        rospy.loginfo('  >> Started MAPE-K ** Analysis (ontological reasoning) **')
+        # rospy.loginfo('Entered timer_cb for metacontrol reasoning')
+        # rospy.loginfo('  >> Started MAPE-K ** Analysis (ontological reasoning) **')
 
         # EXEC REASONING to update ontology with inferences
-        if self.perform_reasoning():
-            rospy.loginfo('     >> Finished ontological reasoning)')
-        else:
+        self._pub_log.publish("start analyse fase")
+        phase_start_time = rospy.get_time()
+        if not self.perform_reasoning():
+            # rospy.loginfo('     >> Finished ontological reasoning)')
+        # else:
             rospy.logerr("Reasoning error")
 
         # PRINT system status
@@ -204,52 +218,89 @@ class RosReasoner(Reasoner):
             
         # EVALUATE functional hierarchy (objectives statuses) (MAPE - Analysis)
         objectives_internal_error = evaluateObjectives(self.tomasys)
+        check_desired_config = False
         if not objectives_internal_error:
             rospy.loginfo("No Objectives in status ERROR: no adaptation is needed")
-            rospy.loginfo('  >> Finished MAPE-K ** ANALYSIS **')
-            rospy.loginfo('Exited timer_cb for metacontrol reasoning')
-            return
+            self._pub_log.publish("end analyse fase")
+            self._pub_phasetimes.publish(KeyValue("analyse",str(rospy.get_time() - phase_start_time)))
+
+            if self.modification == 2:
+                if self.grounded_configuration == self.desired_configuration:
+                    return
+                else:
+                    print(self.grounded_configuration)
+                    print(self.desired_configuration)
+                    objectives_internal_error = [self.onto.o_navigateA]
+                    check_desired_config = True
+            else:
+                return        
+            # rospy.loginfo('  >> Finished MAPE-K ** ANALYSIS **')
+            # rospy.loginfo('Exited timer_cb for metacontrol reasoning')
         elif len(objectives_internal_error) > 1 :
-            rospy.logerr("- More than 1 objectives in error, case not supported yet.")
-            rospy.loginfo('  >> Finished MAPE-K ** ANALYSIS **')
-            rospy.loginfo('Exited timer_cb for metacontrol reasoning')
+            # rospy.logerr("- More than 1 objectives in error, case not supported yet.")
+            # rospy.loginfo('  >> Finished MAPE-K ** ANALYSIS **')
+            # rospy.loginfo('Exited timer_cb for metacontrol reasoning')
             return
         else:
+            self._pub_log.publish("nfr violation found")
+            self._pub_log.publish("end analyse fase")
+            self._pub_phasetimes.publish(KeyValue("analyse",str(rospy.get_time() - phase_start_time)))
+
             rospy.logwarn("Objectives in status ERROR: {}".format([o.name for o in objectives_internal_error]) )
-            rospy.loginfo('  >> Finished MAPE-K ** ANALYSIS **')
+            # rospy.loginfo('  >> Finished MAPE-K ** ANALYSIS **')
 
         # Update kb with predicted QA values
-        rospy.loginfo('  >> Request for QA updates **')
+        # rospy.loginfo('  >> Request for QA updates **')
         try:
+            self._pub_log.publish("request qa predictions")
+            phase_start_time = rospy.get_time()
             req_qa_updates = rospy.ServiceProxy('/qa_pred_update', QAPredictions)
             # rospy.wait_for_service('/qa_pred_update')
             resp = req_qa_updates("")
             self.updateQA_pred(resp.values)
-            rospy.loginfo("QA update request send")
+            # rospy.loginfo("QA update request send")
+            self._pub_log.publish("qa predictions processed")
+            self._pub_phasetimes.publish(KeyValue("qa_update",str(rospy.get_time() - phase_start_time)))
         except Exception as exc:
             print(exc)
             rospy.loginfo('/qa_pred_update service not available')
 
         # ADAPT MAPE -Plan & Execute
         rospy.loginfo('  >> Started MAPE-K ** PLAN adaptation **')
-
-
-        o = objectives_internal_error[0]
-        rospy.loginfo("=> Reasoner searches FD for objective: {}".format(o.name) )
-        fd = obtainBestFunctionDesign(o, self.tomasys)
-        if not fd:
-            rospy.logerr(
-                "No FD found to solve Objective {}".format(o.name)) # for DEBUGGING in csv
-            rospy.loginfo('Exited timer_cb for metacontrol reasoning')
-            return
-        rospy.loginfo('  >> Finished MAPE-K ** Plan adaptation **')
+        if check_desired_config:
+            self._pub_log.publish("start plan fase to check desired configuration")
+            phase_start_time = rospy.get_time()
+            o = objectives_internal_error[0]
+            fd = test_desired_config(o, self.tomasys, self.desired_configuration)
+            if not fd:
+                return
+            self._pub_log.publish("end plan fase")
+            self._pub_phasetimes.publish(KeyValue("plan",str(rospy.get_time() - phase_start_time)))
+        else:
+            self._pub_log.publish("start plan fase")
+            phase_start_time = rospy.get_time()
+            o = objectives_internal_error[0]
+            # rospy.loginfo("=> Reasoner searches FD for objective: {}".format(o.name) )
+            fd = obtainBestFunctionDesign(o, self.tomasys, self.modification)
+            if not fd:
+                rospy.logerr(
+                    "No FD found to solve Objective {}".format(o.name)) # for DEBUGGING in csv
+                rospy.loginfo('Exited timer_cb for metacontrol reasoning')
+                return
+            # rospy.loginfo('  >> Finished MAPE-K ** Plan adaptation **')
+            self._pub_log.publish("end plan fase")
+            self._pub_phasetimes.publish(KeyValue("plan",str(rospy.get_time() - phase_start_time)))
 
         # request new configuration
-        rospy.loginfo('  >> Started MAPE-K ** EXECUTION **')
+        # rospy.loginfo('  >> Started MAPE-K ** EXECUTION **')
+        self._pub_log.publish("start execution fase")
+        phase_start_time = rospy.get_time()
         result = self.request_configuration(fd)
-        rospy.loginfo('  >> Finished MAPE-K ** EXECUTION **')
+        # rospy.loginfo('  >> Finished MAPE-K ** EXECUTION **')
         # Process adaptation feedback to update KB:
         if result == 1: # reconfiguration executed ok
+            self._pub_log.publish("end execution fase")
+            self._pub_phasetimes.publish(KeyValue("execution",str(rospy.get_time() - phase_start_time)))
             rospy.logwarn("= RECONFIGURATION SUCCEEDED =") # for DEBUGGING in csv
             # updates the ontology according to the result of the adaptation action - destroy fg for Obj and create the newly grounded one
             self.grounded_configuration = self.set_new_grounding(fd.name, o) # Set new grounded_configuration

@@ -95,7 +95,7 @@ def updateQAestimation(fd, qa_type, value):
         for qa in qas:
             if qa.isQAtype == qa_type:
                 qa.hasValue = value
-                print("Estimation updated succesfull!")
+                # print("Estimation updated succesfull!")
 
 # Evaluates the Objective individuals in the KB and returns a list with those in error
 def evaluateObjectives(tbox):
@@ -109,25 +109,30 @@ def evaluateObjectives(tbox):
 # Select best FD in the KB, given:
 # - o: individual of tomasys:Objective
 # - tomasys ontology that contains the tomasys tbox
-def obtainBestFunctionDesign(o, tbox):
+def obtainBestFunctionDesign(o, tbox, modification):
     f = o.typeF
     # get fds for Function F
     fds = []
     for fd in list(tbox.FunctionDesign.instances()):
         if fd.solvesF == f:
             fds.append(fd)
-    print("== FunctionDesigns available for obj: %s", str([fd.name for fd in fds]))
-    print("Objective NFR ENERGY: %s", str(o.hasNFR))
+    # print("== FunctionDesigns available for obj: %s", str([fd.name for fd in fds]))
+    # print("Objective NFR ENERGY: %s", str(o.hasNFR))
 
     # fiter fds to only those available
     # FILTER if FD realisability is NOT FALSE (TODO check SWRL rules are complete for this)
     realisable_fds = [fd for fd in fds if fd.fd_realisability != False]
     # print("== FunctionDesigns REALISABLE for obj: ", [fd.name for fd in realisable_fds])
     # discard FDs already grounded for this objective when objective in error
-    suitable_fds= [fd for fd in fds if (not o in fd.fd_error_log)]
+    if modification == 0:
+        suitable_fds = [fd for fd in fds if (not o in fd.fd_error_log)]
+        fds_for_obj = meetNFRs(o, suitable_fds)
+    else:
+        fds_for_obj = meetNFRs(o, realisable_fds)
     # print("== FunctionDesigns suitable NOT IN ERROR LOG: ", [fd.name for fd in suitable_fds])
     # discard those FD that will not meet objective NFRs
-    fds_for_obj = meetNFRs(o, suitable_fds)
+    # fds_for_obj = meetNFRs(o, suitable_fds)
+    # fds_for_obj = meetNFRs(o, realisable_fds)
     # get best FD based on higher Utility/trade-off of QAs
     if fds_for_obj != []:
         print("== FunctionDesigns also meeting NFRs: %s", [fd.name for fd in fds_for_obj])
@@ -139,13 +144,25 @@ def obtainBestFunctionDesign(o, tbox):
                 best_fd = fd
                 aux = u
 
-        print("> Best FD available %s", str(best_fd.name))
+        # print("> Best FD available %s", str(best_fd.name))
         print("> Best FD available %s"%(best_fd.name))
         return best_fd
     else:
         print("*** OPERATOR NEEDED, NO SOLUTION FOUND ***")
         return None
 
+def test_desired_config(o,tbox,desired_configuration):
+    for fd in list(tbox.FunctionDesign.instances()):
+        if fd.name == desired_configuration:
+            fd_desired = fd
+            # break
+    fd_suitable = meetNFRs(o, [fd_desired])
+    if fd_suitable != []:
+        print(fd_suitable)
+        print(fd_suitable[0])
+        return fd_suitable[0]
+    else:
+        return None
 
 def ground_fd(fd, objective, tbox, abox):
     """Given a FunctionDesign fd and an Objective objective, creates an individual FunctionGrounds with typeF fd and solve) objective
@@ -174,27 +191,39 @@ def meetNFRs(o, fds):
         print("== Objective has no NFRs, so a random FD is picked")
         return [next(iter(fds))]
     print("== Checking FDs for Objective with NFRs type: %s and value %s ", str(o.hasNFR[0].isQAtype.name), str(o.hasNFR[0].hasValue))
+    highest_safety = 0.0
     for fd in fds:
+        violate = False
         for nfr in o.hasNFR:
+            print(nfr)
             qas = [qa for qa in fd.hasQAestimation if qa.isQAtype is nfr.isQAtype]
             if len(qas) != 1:
                 print("FD has no expected value for this QA or multiple definitions (inconsistent)")
                 break
+            
+            # if nfr.isQAtype.name == 'energy':
+            #     if qas[0].hasValue > nfr.hasValue: # specific semantics for energy
+            #         break
+            if nfr.isQAtype.name == 'safety':
+                if qas[0].hasValue > highest_safety:
+                    highest_safety = qas[0].hasValue
+                    fd_best = fd
+                print("%s, %s"%(qas[0].name,qas[0].hasValue))
+                if qas[0].hasValue < nfr.hasValue:  # specific semantics for safety
+                    # print("value was lower than nfr")
+                    violate = True
             else:
-                if nfr.isQAtype.name == 'energy':
-                    if qas[0].hasValue > nfr.hasValue: # specific semantics for energy
-                        continue
-                elif nfr.isQAtype.name == 'safety':
-                    if qas[0].hasValue < nfr.hasValue:  # specific semantics for safety
-                        continue
-                else:
-                    print("No known criteria for FD selection for that QA")
-            print("%s, %s"%(qas[0].name,qas[0].hasValue))
+                print("No known criteria for FD selection for that QA")
+                violate = True
+        if not violate:
+            # print("Approved! %s, %s"%(qas[0].name,qas[0].hasValue))
             filtered.append(fd)
     if filtered == []:
         print("No FDs meetf NFRs")
+        return [fd_best]
 
     return filtered
+
 
 # Compute expected utility based on QA trade-off, the criteria to chose FDs/configurations
 # TODO utility is the selection criteria for FDs and it is hardcoded as QA performance
