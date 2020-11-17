@@ -38,7 +38,7 @@
 <toma:QAvalue rdf:about="#qa_performance_dwa_v1_a0_b0">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.762812179583811</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7772856435587228</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_safety_dwa_v1_a0_b0">
@@ -50,6 +50,18 @@
 <toma:Function rdf:about="http://ros_navigation#f_navigate">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
 </toma:Function>
+
+<toma:QualityAttributeType rdf:about="#energy">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</toma:QualityAttributeType>
+
+<toma:QualityAttributeType rdf:about="#performance">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</toma:QualityAttributeType>
+
+<toma:QualityAttributeType rdf:about="#safety">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</toma:QualityAttributeType>
 
 <toma:FunctionDesign rdf:about="#dwa_v1_a0_b1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -68,7 +80,7 @@
 <toma:QAvalue rdf:about="#qa_performance_dwa_v1_a0_b1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7623687280882213</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7732381696494562</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_safety_dwa_v1_a0_b1">
@@ -94,7 +106,7 @@
 <toma:QAvalue rdf:about="#qa_performance_dwa_v1_a1_b0">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7710006184083997</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5740536861505574</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_safety_dwa_v1_a1_b0">
@@ -120,7 +132,7 @@
 <toma:QAvalue rdf:about="#qa_performance_dwa_v1_a1_b1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7653642229215234</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5656769224813816</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_safety_dwa_v1_a1_b1">
@@ -146,7 +158,7 @@
 <toma:QAvalue rdf:about="#qa_performance_dwa_v2_a0_b0">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5885123733091402</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6002116772858987</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_safety_dwa_v2_a0_b0">
@@ -172,7 +184,7 @@
 <toma:QAvalue rdf:about="#qa_performance_dwa_v2_a0_b1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.58628443738938</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5989715797315401</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_safety_dwa_v2_a0_b1">
@@ -198,7 +210,7 @@
 <toma:QAvalue rdf:about="#qa_performance_dwa_v2_a1_b0">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5864568665131225</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5998681958077577</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_safety_dwa_v2_a1_b0">
@@ -224,7 +236,7 @@
 <toma:QAvalue rdf:about="#qa_performance_dwa_v2_a1_b1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5860019114130992</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5977043274411157</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_safety_dwa_v2_a1_b1">
@@ -232,14 +244,6 @@
   <toma:isQAtype rdf:resource="#safety"/>
   <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8842847623072261</toma:hasValue>
 </toma:QAvalue>
-
-<toma:QualityAttributeType rdf:about="#energy">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</toma:QualityAttributeType>
-
-<toma:QualityAttributeType rdf:about="#performance">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</toma:QualityAttributeType>
 
 <toma:QAvalue rdf:about="#qa_energy_teb_v1_a0_b0">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -310,54 +314,50 @@
 <toma:QAvalue rdf:about="#qa_performance_teb_v1_a0_b0">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7784661437290842</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7827092466876536</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_performance_teb_v1_a0_b1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7755772231235402</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7816001557851615</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_performance_teb_v1_a1_b0">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7710504626070748</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7768675344122723</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_performance_teb_v1_a1_b1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7717095822892003</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7773738303131423</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_performance_teb_v2_a0_b0">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6079309555708206</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6126796673706709</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_performance_teb_v2_a0_b1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6088020071256314</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.612515529594123</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_performance_teb_v2_a1_b0">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6085582387403276</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6141123315790532</toma:hasValue>
 </toma:QAvalue>
 
 <toma:QAvalue rdf:about="#qa_performance_teb_v2_a1_b1">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <toma:isQAtype rdf:resource="#performance"/>
-  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.607768889734814</toma:hasValue>
+  <toma:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6133811479510846</toma:hasValue>
 </toma:QAvalue>
-
-<toma:QualityAttributeType rdf:about="#safety">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-</toma:QualityAttributeType>
 
 <toma:QAvalue rdf:about="#qa_safety_teb_v1_a0_b0">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -549,162 +549,6 @@
                                     <swrl:IndividualPropertyAtom>
                                       <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#isQAtype"/>
                                       <swrl:argument1 rdf:resource="http://abb_scenario3#qa"/>
-                                      <swrl:argument2 rdf:resource="#safety"/>
-                                    </swrl:IndividualPropertyAtom>
-                                  </rdf:first>
-                                  <rdf:rest>
-                                    <swrl:AtomList>
-                                      <rdf:first>
-                                        <swrl:IndividualPropertyAtom>
-                                          <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#isQAtype"/>
-                                          <swrl:argument1 rdf:resource="http://abb_scenario3#nfr"/>
-                                          <swrl:argument2 rdf:resource="#safety"/>
-                                        </swrl:IndividualPropertyAtom>
-                                      </rdf:first>
-                                      <rdf:rest>
-                                        <swrl:AtomList>
-                                          <rdf:first>
-                                            <swrl:DatavaluedPropertyAtom>
-                                              <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#hasValue"/>
-                                              <swrl:argument1 rdf:resource="http://abb_scenario3#nfr"/>
-                                              <swrl:argument2 rdf:resource="http://abb_scenario3#nfrv"/>
-                                            </swrl:DatavaluedPropertyAtom>
-                                          </rdf:first>
-                                          <rdf:rest>
-                                            <swrl:AtomList>
-                                              <rdf:first>
-                                                <swrl:DatavaluedPropertyAtom>
-                                                  <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#hasValue"/>
-                                                  <swrl:argument1 rdf:resource="http://abb_scenario3#qa"/>
-                                                  <swrl:argument2 rdf:resource="http://abb_scenario3#qav"/>
-                                                </swrl:DatavaluedPropertyAtom>
-                                              </rdf:first>
-                                              <rdf:rest>
-                                                <swrl:AtomList>
-                                                  <rdf:first>
-                                                    <swrl:BuiltinAtom>
-                                                      <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
-                                                      <swrl:arguments>
-                                                        <rdf:Description>
-                                                          <rdf:first rdf:resource="http://abb_scenario3#nfrv"/>
-                                                          <rdf:rest>
-                                                            <rdf:Description>
-                                                              <rdf:first rdf:resource="http://abb_scenario3#qav"/>
-                                                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                            </rdf:Description>
-                                                          </rdf:rest>
-                                                        </rdf:Description>
-                                                      </swrl:arguments>
-                                                    </swrl:BuiltinAtom>
-                                                  </rdf:first>
-                                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                </swrl:AtomList>
-                                              </rdf:rest>
-                                            </swrl:AtomList>
-                                          </rdf:rest>
-                                        </swrl:AtomList>
-                                      </rdf:rest>
-                                    </swrl:AtomList>
-                                  </rdf:rest>
-                                </swrl:AtomList>
-                              </rdf:rest>
-                            </swrl:AtomList>
-                          </rdf:rest>
-                        </swrl:AtomList>
-                      </rdf:rest>
-                    </swrl:AtomList>
-                  </rdf:rest>
-                </swrl:AtomList>
-              </rdf:rest>
-            </swrl:AtomList>
-          </rdf:rest>
-        </swrl:AtomList>
-      </rdf:rest>
-    </swrl:AtomList>
-  </swrl:body>
-  <swrl:head>
-    <swrl:AtomList>
-      <rdf:first>
-        <swrl:DatavaluedPropertyAtom>
-          <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#o_status"/>
-          <swrl:argument1 rdf:resource="http://abb_scenario3#o"/>
-          <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INTERNAL_ERROR</swrl:argument2>
-        </swrl:DatavaluedPropertyAtom>
-      </rdf:first>
-      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-    </swrl:AtomList>
-  </swrl:head>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">if objective has NFR safety and FG has QAvalue lower, objective in internal error</rdfs:comment>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QAsafety</rdfs:label>
-  <swrl2:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl2:isRuleEnabled>
-</swrl:Imp>
-
-<swrl:Imp>
-  <swrl:body>
-    <swrl:AtomList>
-      <rdf:first>
-        <swrl:ClassAtom>
-          <swrl:classPredicate rdf:resource="http://metacontrol.org/tomasys#Objective"/>
-          <swrl:argument1 rdf:resource="http://abb_scenario3#o"/>
-        </swrl:ClassAtom>
-      </rdf:first>
-      <rdf:rest>
-        <swrl:AtomList>
-          <rdf:first>
-            <swrl:ClassAtom>
-              <swrl:classPredicate rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
-              <swrl:argument1 rdf:resource="http://abb_scenario3#nfr"/>
-            </swrl:ClassAtom>
-          </rdf:first>
-          <rdf:rest>
-            <swrl:AtomList>
-              <rdf:first>
-                <swrl:ClassAtom>
-                  <swrl:classPredicate rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
-                  <swrl:argument1 rdf:resource="http://abb_scenario3#qa"/>
-                </swrl:ClassAtom>
-              </rdf:first>
-              <rdf:rest>
-                <swrl:AtomList>
-                  <rdf:first>
-                    <swrl:IndividualPropertyAtom>
-                      <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#hasNFR"/>
-                      <swrl:argument1 rdf:resource="http://abb_scenario3#o"/>
-                      <swrl:argument2 rdf:resource="http://abb_scenario3#nfr"/>
-                    </swrl:IndividualPropertyAtom>
-                  </rdf:first>
-                  <rdf:rest>
-                    <swrl:AtomList>
-                      <rdf:first>
-                        <swrl:ClassAtom>
-                          <swrl:classPredicate rdf:resource="http://metacontrol.org/tomasys#FunctionGrounding"/>
-                          <swrl:argument1 rdf:resource="http://abb_scenario3#fg"/>
-                        </swrl:ClassAtom>
-                      </rdf:first>
-                      <rdf:rest>
-                        <swrl:AtomList>
-                          <rdf:first>
-                            <swrl:IndividualPropertyAtom>
-                              <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#solvesO"/>
-                              <swrl:argument1 rdf:resource="http://abb_scenario3#fg"/>
-                              <swrl:argument2 rdf:resource="http://abb_scenario3#o"/>
-                            </swrl:IndividualPropertyAtom>
-                          </rdf:first>
-                          <rdf:rest>
-                            <swrl:AtomList>
-                              <rdf:first>
-                                <swrl:IndividualPropertyAtom>
-                                  <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#hasQAvalue"/>
-                                  <swrl:argument1 rdf:resource="http://abb_scenario3#fg"/>
-                                  <swrl:argument2 rdf:resource="http://abb_scenario3#qa"/>
-                                </swrl:IndividualPropertyAtom>
-                              </rdf:first>
-                              <rdf:rest>
-                                <swrl:AtomList>
-                                  <rdf:first>
-                                    <swrl:IndividualPropertyAtom>
-                                      <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#isQAtype"/>
-                                      <swrl:argument1 rdf:resource="http://abb_scenario3#qa"/>
                                       <swrl:argument2 rdf:resource="#energy"/>
                                     </swrl:IndividualPropertyAtom>
                                   </rdf:first>
@@ -792,6 +636,162 @@
   </swrl:head>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">if objective has NFR energy and FG has QAvalue higher, objective in internal error</rdfs:comment>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QAenergy</rdfs:label>
+  <swrl2:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl2:isRuleEnabled>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <swrl:AtomList>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="http://metacontrol.org/tomasys#Objective"/>
+          <swrl:argument1 rdf:resource="http://abb_scenario3#o"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <swrl:AtomList>
+          <rdf:first>
+            <swrl:ClassAtom>
+              <swrl:classPredicate rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
+              <swrl:argument1 rdf:resource="http://abb_scenario3#nfr"/>
+            </swrl:ClassAtom>
+          </rdf:first>
+          <rdf:rest>
+            <swrl:AtomList>
+              <rdf:first>
+                <swrl:ClassAtom>
+                  <swrl:classPredicate rdf:resource="http://metacontrol.org/tomasys#QAvalue"/>
+                  <swrl:argument1 rdf:resource="http://abb_scenario3#qa"/>
+                </swrl:ClassAtom>
+              </rdf:first>
+              <rdf:rest>
+                <swrl:AtomList>
+                  <rdf:first>
+                    <swrl:IndividualPropertyAtom>
+                      <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#hasNFR"/>
+                      <swrl:argument1 rdf:resource="http://abb_scenario3#o"/>
+                      <swrl:argument2 rdf:resource="http://abb_scenario3#nfr"/>
+                    </swrl:IndividualPropertyAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <swrl:AtomList>
+                      <rdf:first>
+                        <swrl:ClassAtom>
+                          <swrl:classPredicate rdf:resource="http://metacontrol.org/tomasys#FunctionGrounding"/>
+                          <swrl:argument1 rdf:resource="http://abb_scenario3#fg"/>
+                        </swrl:ClassAtom>
+                      </rdf:first>
+                      <rdf:rest>
+                        <swrl:AtomList>
+                          <rdf:first>
+                            <swrl:IndividualPropertyAtom>
+                              <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#solvesO"/>
+                              <swrl:argument1 rdf:resource="http://abb_scenario3#fg"/>
+                              <swrl:argument2 rdf:resource="http://abb_scenario3#o"/>
+                            </swrl:IndividualPropertyAtom>
+                          </rdf:first>
+                          <rdf:rest>
+                            <swrl:AtomList>
+                              <rdf:first>
+                                <swrl:IndividualPropertyAtom>
+                                  <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#hasQAvalue"/>
+                                  <swrl:argument1 rdf:resource="http://abb_scenario3#fg"/>
+                                  <swrl:argument2 rdf:resource="http://abb_scenario3#qa"/>
+                                </swrl:IndividualPropertyAtom>
+                              </rdf:first>
+                              <rdf:rest>
+                                <swrl:AtomList>
+                                  <rdf:first>
+                                    <swrl:IndividualPropertyAtom>
+                                      <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#isQAtype"/>
+                                      <swrl:argument1 rdf:resource="http://abb_scenario3#qa"/>
+                                      <swrl:argument2 rdf:resource="#safety"/>
+                                    </swrl:IndividualPropertyAtom>
+                                  </rdf:first>
+                                  <rdf:rest>
+                                    <swrl:AtomList>
+                                      <rdf:first>
+                                        <swrl:IndividualPropertyAtom>
+                                          <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#isQAtype"/>
+                                          <swrl:argument1 rdf:resource="http://abb_scenario3#nfr"/>
+                                          <swrl:argument2 rdf:resource="#safety"/>
+                                        </swrl:IndividualPropertyAtom>
+                                      </rdf:first>
+                                      <rdf:rest>
+                                        <swrl:AtomList>
+                                          <rdf:first>
+                                            <swrl:DatavaluedPropertyAtom>
+                                              <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#hasValue"/>
+                                              <swrl:argument1 rdf:resource="http://abb_scenario3#nfr"/>
+                                              <swrl:argument2 rdf:resource="http://abb_scenario3#nfrv"/>
+                                            </swrl:DatavaluedPropertyAtom>
+                                          </rdf:first>
+                                          <rdf:rest>
+                                            <swrl:AtomList>
+                                              <rdf:first>
+                                                <swrl:DatavaluedPropertyAtom>
+                                                  <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#hasValue"/>
+                                                  <swrl:argument1 rdf:resource="http://abb_scenario3#qa"/>
+                                                  <swrl:argument2 rdf:resource="http://abb_scenario3#qav"/>
+                                                </swrl:DatavaluedPropertyAtom>
+                                              </rdf:first>
+                                              <rdf:rest>
+                                                <swrl:AtomList>
+                                                  <rdf:first>
+                                                    <swrl:BuiltinAtom>
+                                                      <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                                                      <swrl:arguments>
+                                                        <rdf:Description>
+                                                          <rdf:first rdf:resource="http://abb_scenario3#nfrv"/>
+                                                          <rdf:rest>
+                                                            <rdf:Description>
+                                                              <rdf:first rdf:resource="http://abb_scenario3#qav"/>
+                                                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                            </rdf:Description>
+                                                          </rdf:rest>
+                                                        </rdf:Description>
+                                                      </swrl:arguments>
+                                                    </swrl:BuiltinAtom>
+                                                  </rdf:first>
+                                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                </swrl:AtomList>
+                                              </rdf:rest>
+                                            </swrl:AtomList>
+                                          </rdf:rest>
+                                        </swrl:AtomList>
+                                      </rdf:rest>
+                                    </swrl:AtomList>
+                                  </rdf:rest>
+                                </swrl:AtomList>
+                              </rdf:rest>
+                            </swrl:AtomList>
+                          </rdf:rest>
+                        </swrl:AtomList>
+                      </rdf:rest>
+                    </swrl:AtomList>
+                  </rdf:rest>
+                </swrl:AtomList>
+              </rdf:rest>
+            </swrl:AtomList>
+          </rdf:rest>
+        </swrl:AtomList>
+      </rdf:rest>
+    </swrl:AtomList>
+  </swrl:body>
+  <swrl:head>
+    <swrl:AtomList>
+      <rdf:first>
+        <swrl:DatavaluedPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="http://metacontrol.org/tomasys#o_status"/>
+          <swrl:argument1 rdf:resource="http://abb_scenario3#o"/>
+          <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INTERNAL_ERROR</swrl:argument2>
+        </swrl:DatavaluedPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </swrl:AtomList>
+  </swrl:head>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">if objective has NFR safety and FG has QAvalue lower, objective in internal error</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">QAsafety</rdfs:label>
   <swrl2:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl2:isRuleEnabled>
 </swrl:Imp>
 

@@ -118,7 +118,9 @@ def obtainBestFunctionDesign(o, tbox, modification):
             fds.append(fd)
     # print("== FunctionDesigns available for obj: %s", str([fd.name for fd in fds]))
     # print("Objective NFR ENERGY: %s", str(o.hasNFR))
-
+    print("Hier!")
+    current_config = tbox.FunctionGrounding.instances()[0].typeFD.name
+    print(current_config)
     # fiter fds to only those available
     # FILTER if FD realisability is NOT FALSE (TODO check SWRL rules are complete for this)
     realisable_fds = [fd for fd in fds if fd.fd_realisability != False]
@@ -126,9 +128,9 @@ def obtainBestFunctionDesign(o, tbox, modification):
     # discard FDs already grounded for this objective when objective in error
     if modification == 0:
         suitable_fds = [fd for fd in fds if (not o in fd.fd_error_log)]
-        fds_for_obj = meetNFRs(o, suitable_fds)
     else:
-        fds_for_obj = meetNFRs(o, realisable_fds)
+        suitable_fds = [fd for fd in fds if (not fd.name == current_config)]
+    fds_for_obj = meetNFRs(o, suitable_fds)
     # print("== FunctionDesigns suitable NOT IN ERROR LOG: ", [fd.name for fd in suitable_fds])
     # discard those FD that will not meet objective NFRs
     # fds_for_obj = meetNFRs(o, suitable_fds)

@@ -22,6 +22,8 @@ class RosReasoner(Reasoner):
         # Start rosnode
         rospy.init_node('mros1_reasoner_node', anonymous=True)
 
+        self.count = 0
+
         #### Read ROS parameters
         # Get ontology and tomasys file paths from parameters
         model_file = self.check_and_read_parameter('~model_file')
@@ -133,7 +135,7 @@ class RosReasoner(Reasoner):
 
         elif len(objectives) == 1:
             o = objectives[0]
-            fd = obtainBestFunctionDesign(o, self.tomasys)
+            fd = obtainBestFunctionDesign(o, self.tomasys, self.modification)
             self.set_new_grounding(fd.name, o)
             rospy.logwarn('Objective, NFRs and initial FG are generated from the OWL file')
         else:
@@ -219,6 +221,8 @@ class RosReasoner(Reasoner):
         # EVALUATE functional hierarchy (objectives statuses) (MAPE - Analysis)
         objectives_internal_error = evaluateObjectives(self.tomasys)
         check_desired_config = False
+        self.count+=1
+        self._pub_log.publish("count=%s"%self.count)
         if not objectives_internal_error:
             rospy.loginfo("No Objectives in status ERROR: no adaptation is needed")
             self._pub_log.publish("end analyse fase")
@@ -228,10 +232,13 @@ class RosReasoner(Reasoner):
                 if self.grounded_configuration == self.desired_configuration:
                     return
                 else:
-                    print(self.grounded_configuration)
-                    print(self.desired_configuration)
-                    objectives_internal_error = [self.onto.o_navigateA]
-                    check_desired_config = True
+                    if self.count > 3:
+                        # print(self.grounded_configuration)
+                        # print(self.desired_configuration)
+                        objectives_internal_error = [self.onto.o_navigateA]
+                        check_desired_config = True
+                    else:
+                        return
             else:
                 return        
             # rospy.loginfo('  >> Finished MAPE-K ** ANALYSIS **')
@@ -299,6 +306,7 @@ class RosReasoner(Reasoner):
         # rospy.loginfo('  >> Finished MAPE-K ** EXECUTION **')
         # Process adaptation feedback to update KB:
         if result == 1: # reconfiguration executed ok
+            self.count = 0
             self._pub_log.publish("end execution fase")
             self._pub_phasetimes.publish(KeyValue("execution",str(rospy.get_time() - phase_start_time)))
             rospy.logwarn("= RECONFIGURATION SUCCEEDED =") # for DEBUGGING in csv
